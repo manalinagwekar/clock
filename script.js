@@ -12,10 +12,11 @@ const timeZoneMapping = {
     IST: 'Asia/Kolkata',
 };
 
+// Create the orange-shaped clock using an SVG path
 function createClockSVG(fruitColor) {
     return `
         <svg viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="90" fill="${fruitColor}" stroke="#ff6347" stroke-width="5"/>
+            <circle cx="100" cy="100" r="90" fill="${fruitColor}" stroke="#ff6347" stroke-width="5" />
             <g class="numbers"></g>
             <g class="hands">
                 <line class="hour" x1="100" y1="100" x2="100" y2="50" stroke="green" stroke-width="6"/>
@@ -26,15 +27,17 @@ function createClockSVG(fruitColor) {
     `;
 }
 
-function drawClock(clock, timeZone, fruitColor) {
-    const svg = createClockSVG(fruitColor);
-    clock.innerHTML = svg;
-
+// Function to position numbers correctly
+function positionNumbers(clock) {
     const numbersGroup = clock.querySelector('.numbers');
+    const centerX = 100;
+    const centerY = 100;
+    const radius = 70; // Reduced radius for better positioning
+
     for (let i = 1; i <= 12; i++) {
-        const angle = (i * Math.PI) / 6;
-        const x = 100 + Math.cos(angle) * 70;
-        const y = 100 + Math.sin(angle) * 70;
+        const angle = (i * Math.PI) / 6; // 30 degrees in radians
+        const x = centerX + Math.cos(angle) * radius;
+        const y = centerY + Math.sin(angle) * radius;
         const number = document.createElementNS("http://www.w3.org/2000/svg", "text");
         number.setAttribute("x", x);
         number.setAttribute("y", y);
@@ -45,6 +48,13 @@ function drawClock(clock, timeZone, fruitColor) {
         number.textContent = i;
         numbersGroup.appendChild(number);
     }
+}
+
+function drawClock(clock, timeZone, fruitColor) {
+    const svg = createClockSVG(fruitColor);
+    clock.innerHTML = svg;
+
+    positionNumbers(clock);
 
     const now = new Date();
     const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
@@ -59,7 +69,7 @@ function drawClock(clock, timeZone, fruitColor) {
     // Change number colors based on time
     const isDaytime = (hour >= 6 && hour < 18);
     const numberColor = isDaytime ? 'lightgray' : 'darkgray';
-    numbersGroup.querySelectorAll('text').forEach(number => {
+    clock.querySelectorAll('text').forEach(number => {
         number.setAttribute("fill", numberColor);
     });
 }
@@ -70,10 +80,10 @@ function setHandRotation(clock, handClass, degrees) {
 }
 
 function updateClocks() {
-    drawClock(clocks.est, 'America/New_York', '#ffcccb'); // Light Pink for EST
-    drawClock(clocks.pst, 'America/Los_Angeles', '#ffe4e1'); // Misty Rose for PST
-    drawClock(clocks.mst, 'America/Denver', '#ffb6c1'); // Light Pink for MST
-    drawClock(clocks.ist, 'Asia/Kolkata', '#f08080'); // Light Coral for IST
+    drawClock(clocks.est, 'America/New_York', '#ffa500'); // Orange color for EST
+    drawClock(clocks.pst, 'America/Los_Angeles', '#ff4500'); // Dark Orange for PST
+    drawClock(clocks.mst, 'America/Denver', '#ff7f50'); // Coral for MST
+    drawClock(clocks.ist, 'Asia/Kolkata', '#ff6347'); // Tomato for IST
 
     requestAnimationFrame(updateClocks);
 }
