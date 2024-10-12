@@ -7,52 +7,67 @@
     <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
 </head>
 <body>
+    <div class="floral-background"></div>
     <h1>Current Time in Different Time Zones</h1>
     <div class="container">
-        <div id="est" class="clock">EST: 00:00</div>
-        <div id="pst" class="clock">PST: 00:00</div>
-        <div id="mt" class="clock">MT: 00:00</div>
-        <div id="ist" class="clock">IST: 00:00</div>
+        <div id="est" class="clock">
+            <div class="hand hour-hand"></div>
+            <div class="hand minute-hand"></div>
+            <div class="hand second-hand"></div>
+            <div class="center-dot"></div>
+            <div class="label">EST</div>
+        </div>
+        <div id="pst" class="clock">
+            <div class="hand hour-hand"></div>
+            <div class="hand minute-hand"></div>
+            <div class="hand second-hand"></div>
+            <div class="center-dot"></div>
+            <div class="label">PST</div>
+        </div>
+        <div id="mt" class="clock">
+            <div class="hand hour-hand"></div>
+            <div class="hand minute-hand"></div>
+            <div class="hand second-hand"></div>
+            <div class="center-dot"></div>
+            <div class="label">MT</div>
+        </div>
+        <div id="ist" class="clock">
+            <div class="hand hour-hand"></div>
+            <div class="hand minute-hand"></div>
+            <div class="hand second-hand"></div>
+            <div class="center-dot"></div>
+            <div class="label">IST</div>
+        </div>
     </div>
     <button class="mode-toggle" onclick="toggleMode()">Toggle Day/Night Mode</button>
 
     <script>
         function getTimeZoneTime(timeZone) {
-            const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
             return new Intl.DateTimeFormat('en-US', options).format(new Date());
         }
 
         function updateTime() {
-            const estTime = getTimeZoneTime('America/New_York');
-            const pstTime = getTimeZoneTime('America/Los_Angeles');
-            const mtTime = getTimeZoneTime('America/Denver');
-            const istTime = getTimeZoneTime('Asia/Kolkata');
+            const estTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+            const pstTime = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
+            const mtTime = new Date().toLocaleString('en-US', { timeZone: 'America/Denver' });
+            const istTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
 
-            const estHour = parseInt(estTime.split(':')[0]);
-            const pstHour = parseInt(pstTime.split(':')[0]);
-            const mtHour = parseInt(mtTime.split(':')[0]);
-            const istHour = parseInt(istTime.split(':')[0]);
-
-            document.getElementById('est').innerText = `EST: ${estTime}`;
-            document.getElementById('pst').innerText = `PST: ${pstTime}`;
-            document.getElementById('mt').innerText = `MT: ${mtTime}`;
-            document.getElementById('ist').innerText = `IST: ${istTime}`;
-
-            updateClockTheme('est', estHour);
-            updateClockTheme('pst', pstHour);
-            updateClockTheme('mt', mtHour);
-            updateClockTheme('ist', istHour);
+            updateClock('est', estTime);
+            updateClock('pst', pstTime);
+            updateClock('mt', mtTime);
+            updateClock('ist', istTime);
         }
 
-        function updateClockTheme(id, hour) {
-            const clock = document.getElementById(id);
-            if (hour >= 6 && hour < 18) { // Daytime: 6 AM to 6 PM
-                clock.classList.add('day');
-                clock.classList.remove('night');
-            } else { // Nighttime: 6 PM to 6 AM
-                clock.classList.add('night');
-                clock.classList.remove('day');
-            }
+        function updateClock(id, time) {
+            const [hours, minutes, seconds] = time.split(/:| /).map(Number);
+            const hourDeg = (hours % 12) * 30 + (minutes / 60) * 30; // 30 degrees per hour
+            const minuteDeg = minutes * 6; // 6 degrees per minute
+            const secondDeg = seconds * 6; // 6 degrees per second
+
+            document.getElementById(id).querySelector('.hour-hand').style.transform = `rotate(${hourDeg}deg)`;
+            document.getElementById(id).querySelector('.minute-hand').style.transform = `rotate(${minuteDeg}deg)`;
+            document.getElementById(id).querySelector('.second-hand').style.transform = `rotate(${secondDeg}deg)`;
         }
 
         function toggleMode() {
