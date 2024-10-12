@@ -4,7 +4,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('https://unsplash.com/photos/a-table-topped-with-oranges-and-other-fruits-jGxDJmAcZNU'); /* Replace with your background image URL */
+    background-image: url('orange.avif'); /* Replace with your background image URL */
     background-size: cover;
     font-family: Arial, sans-serif;
     margin: 0;
