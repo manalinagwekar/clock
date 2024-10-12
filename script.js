@@ -12,11 +12,11 @@ const timeZoneMapping = {
     IST: 'Asia/Kolkata',
 };
 
-// Create the orange-shaped clock using an SVG path
-function createClockSVG(fruitColor) {
+// Create the clock SVG using an orange-shaped path
+function createClockSVG() {
     return `
         <svg viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="90" fill="${fruitColor}" stroke="#ff6347" stroke-width="5" />
+            <circle cx="100" cy="100" r="90" fill="#FFA500" stroke="#ff6347" stroke-width="5" />
             <g class="numbers"></g>
             <g class="hands">
                 <line class="hour" x1="100" y1="100" x2="100" y2="50" stroke="green" stroke-width="6"/>
@@ -51,8 +51,8 @@ function positionNumbers(clock) {
     }
 }
 
-function drawClock(clock, timeZone, fruitColor) {
-    const svg = createClockSVG(fruitColor);
+function drawClock(clock, timeZone) {
+    const svg = createClockSVG();
     clock.innerHTML = svg;
 
     positionNumbers(clock);
@@ -88,10 +88,10 @@ function setHandRotation(clock, handClass, degrees) {
 }
 
 function updateClocks() {
-    drawClock(clocks.est, 'America/New_York', '#ffa500'); // Orange color for EST
-    drawClock(clocks.pst, 'America/Los_Angeles', '#ff4500'); // Dark Orange for PST
-    drawClock(clocks.mst, 'America/Denver', '#ff7f50'); // Coral for MST
-    drawClock(clocks.ist, 'Asia/Kolkata', '#ff6347'); // Tomato for IST
+    drawClock(clocks.est, 'America/New_York');
+    drawClock(clocks.pst, 'America/Los_Angeles');
+    drawClock(clocks.mst, 'America/Denver');
+    drawClock(clocks.ist, 'Asia/Kolkata');
 
     requestAnimationFrame(updateClocks);
 }
