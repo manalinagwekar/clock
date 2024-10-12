@@ -3,140 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Zone Clock</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
+    <title>Artistic Analog Clocks</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="floral-background"></div>
-    <h1>Current Time in Different Time Zones</h1>
+    <h1>Artistic Multi-Time Zone Clocks</h1>
     <div class="container">
-        <div id="est" class="clock">
-            <div class="hand hour-hand"></div>
-            <div class="hand minute-hand"></div>
-            <div class="hand second-hand"></div>
-            <div class="center-dot"></div>
-            <div class="label">EST</div>
-            <div class="numbers">
-                <div class="number" style="transform: rotate(0deg);">12</div>
-                <div class="number" style="transform: rotate(30deg);">1</div>
-                <div class="number" style="transform: rotate(60deg);">2</div>
-                <div class="number" style="transform: rotate(90deg);">3</div>
-                <div class="number" style="transform: rotate(120deg);">4</div>
-                <div class="number" style="transform: rotate(150deg);">5</div>
-                <div class="number" style="transform: rotate(180deg);">6</div>
-                <div class="number" style="transform: rotate(210deg);">7</div>
-                <div class="number" style="transform: rotate(240deg);">8</div>
-                <div class="number" style="transform: rotate(270deg);">9</div>
-                <div class="number" style="transform: rotate(300deg);">10</div>
-                <div class="number" style="transform: rotate(330deg);">11</div>
-            </div>
-        </div>
-        <div id="pst" class="clock">
-            <div class="hand hour-hand"></div>
-            <div class="hand minute-hand"></div>
-            <div class="hand second-hand"></div>
-            <div class="center-dot"></div>
-            <div class="label">PST</div>
-            <div class="numbers">
-                <div class="number" style="transform: rotate(0deg);">12</div>
-                <div class="number" style="transform: rotate(30deg);">1</div>
-                <div class="number" style="transform: rotate(60deg);">2</div>
-                <div class="number" style="transform: rotate(90deg);">3</div>
-                <div class="number" style="transform: rotate(120deg);">4</div>
-                <div class="number" style="transform: rotate(150deg);">5</div>
-                <div class="number" style="transform: rotate(180deg);">6</div>
-                <div class="number" style="transform: rotate(210deg);">7</div>
-                <div class="number" style="transform: rotate(240deg);">8</div>
-                <div class="number" style="transform: rotate(270deg);">9</div>
-                <div class="number" style="transform: rotate(300deg);">10</div>
-                <div class="number" style="transform: rotate(330deg);">11</div>
-            </div>
-        </div>
-        <div id="mt" class="clock">
-            <div class="hand hour-hand"></div>
-            <div class="hand minute-hand"></div>
-            <div class="hand second-hand"></div>
-            <div class="center-dot"></div>
-            <div class="label">MT</div>
-            <div class="numbers">
-                <div class="number" style="transform: rotate(0deg);">12</div>
-                <div class="number" style="transform: rotate(30deg);">1</div>
-                <div class="number" style="transform: rotate(60deg);">2</div>
-                <div class="number" style="transform: rotate(90deg);">3</div>
-                <div class="number" style="transform: rotate(120deg);">4</div>
-                <div class="number" style="transform: rotate(150deg);">5</div>
-                <div class="number" style="transform: rotate(180deg);">6</div>
-                <div class="number" style="transform: rotate(210deg);">7</div>
-                <div class="number" style="transform: rotate(240deg);">8</div>
-                <div class="number" style="transform: rotate(270deg);">9</div>
-                <div class="number" style="transform: rotate(300deg);">10</div>
-                <div class="number" style="transform: rotate(330deg);">11</div>
-            </div>
-        </div>
-        <div id="ist" class="clock">
-            <div class="hand hour-hand"></div>
-            <div class="hand minute-hand"></div>
-            <div class="hand second-hand"></div>
-            <div class="center-dot"></div>
-            <div class="label">IST</div>
-            <div class="numbers">
-                <div class="number" style="transform: rotate(0deg);">12</div>
-                <div class="number" style="transform: rotate(30deg);">1</div>
-                <div class="number" style="transform: rotate(60deg);">2</div>
-                <div class="number" style="transform: rotate(90deg);">3</div>
-                <div class="number" style="transform: rotate(120deg);">4</div>
-                <div class="number" style="transform: rotate(150deg);">5</div>
-                <div class="number" style="transform: rotate(180deg);">6</div>
-                <div class="number" style="transform: rotate(210deg);">7</div>
-                <div class="number" style="transform: rotate(240deg);">8</div>
-                <div class="number" style="transform: rotate(270deg);">9</div>
-                <div class="number" style="transform: rotate(300deg);">10</div>
-                <div class="number" style="transform: rotate(330deg);">11</div>
-            </div>
-        </div>
+        <div class="clock" id="estClock"></div>
+        <div class="clock" id="pstClock"></div>
+        <div class="clock" id="mtClock"></div>
+        <div class="clock" id="istClock"></div>
     </div>
 
-    <script>
-        function getTimeZoneTime(timeZone) {
-            const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-            return new Intl.DateTimeFormat('en-US', options).format(new Date());
-        }
-
-        function updateTime() {
-            const estTime = getTimeZoneTime('America/New_York');
-            const pstTime = getTimeZoneTime('America/Los_Angeles');
-            const mtTime = getTimeZoneTime('America/Denver');
-            const istTime = getTimeZoneTime('Asia/Kolkata');
-
-            updateClock('est', estTime);
-            updateClock('pst', pstTime);
-            updateClock('mt', mtTime);
-            updateClock('ist', istTime);
-        }
-
-        function updateClock(id, time) {
-            const [hour, minute, second, period] = time.split(/:| /);
-            const hourDeg = ((parseInt(hour) % 12) + (parseInt(minute) / 60)) * 30; // 30 degrees per hour
-            const minuteDeg = parseInt(minute) * 6; // 6 degrees per minute
-            const secondDeg = parseInt(second) * 6; // 6 degrees per second
-
-            const clock = document.getElementById(id);
-            clock.querySelector('.hour-hand').style.transform = `rotate(${hourDeg}deg)`;
-            clock.querySelector('.minute-hand').style.transform = `rotate(${minuteDeg}deg)`;
-            clock.querySelector('.second-hand').style.transform = `rotate(${secondDeg}deg)`;
-
-            // Set number colors based on time of day
-            const hourNumber = parseInt(hour);
-            const isDaytime = (hourNumber >= 6 && hourNumber < 18);
-            const numbers = clock.querySelectorAll('.number');
-
-            numbers.forEach((num) => {
-                num.style.color = isDaytime ? 'lightgray' : 'darkgray'; // Change colors based on time
-            });
-        }
-
-        setInterval(updateTime, 1000);
-        updateTime(); // Initial call to set the time immediately
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
