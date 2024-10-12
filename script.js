@@ -58,14 +58,21 @@ function drawClock(clock, timeZone, fruitColor) {
     positionNumbers(clock);
 
     const now = new Date();
-    const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+    const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
     const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
-    const [hour, minute, second] = timeString.split(':').map(Number);
+    
+    const [datePart, timePart] = timeString.split(', ');
+    const [year, month, day] = datePart.split(' '); // Split the date part to extract components
+    const [hour, minute, second] = timePart.split(':').map(Number);
 
     // Set hand positions
     setHandRotation(clock, 'hour', (hour % 12) * 30 + minute * 0.5);
     setHandRotation(clock, 'minute', minute * 6 + second * 0.1);
     setHandRotation(clock, 'second', second * 6);
+
+    // Update date information
+    const dateInfoDiv = clock.querySelector('.date-info');
+    dateInfoDiv.textContent = `${month} ${day}, ${year} (${new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone }).format(now)})`;
 
     // Change number colors based on time
     const isDaytime = (hour >= 6 && hour < 18);
