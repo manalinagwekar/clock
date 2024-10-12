@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artistic Analog Clocks</title>
+    <title>Multi-Time Zone Clocks</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Artistic Multi-Time Zone Clocks</h1>
+    <h1>Analog Clocks for Multiple Time Zones</h1>
     <div class="container">
-        <div class="clock" id="estClock"></div>
-        <div class="clock" id="pstClock"></div>
-        <div class="clock" id="mtClock"></div>
-        <div class="clock" id="istClock"></div>
+        <div class="clock" id="estClock" onclick="showTimeInfo('EST')"></div>
+        <div class="clock" id="pstClock" onclick="showTimeInfo('PST')"></div>
+        <div class="clock" id="mstClock" onclick="showTimeInfo('MST')"></div>
+        <div class="clock" id="istClock" onclick="showTimeInfo('IST')"></div>
     </div>
-
+    <div id="timeInfo" class="time-info"></div>
     <script src="script.js"></script>
 </body>
 </html>
