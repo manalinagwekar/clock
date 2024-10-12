@@ -12,10 +12,10 @@ const timeZoneMapping = {
     IST: 'Asia/Kolkata',
 };
 
-function createClockSVG() {
+function createClockSVG(fruitColor) {
     return `
         <svg viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="90" fill="rgba(255, 235, 205, 0.8)" stroke="#ff6347" stroke-width="5"/>
+            <circle cx="100" cy="100" r="90" fill="${fruitColor}" stroke="#ff6347" stroke-width="5"/>
             <g class="numbers"></g>
             <g class="hands">
                 <line class="hour" x1="100" y1="100" x2="100" y2="50" stroke="green" stroke-width="6"/>
@@ -26,8 +26,8 @@ function createClockSVG() {
     `;
 }
 
-function drawClock(clock, timeZone) {
-    const svg = createClockSVG();
+function drawClock(clock, timeZone, fruitColor) {
+    const svg = createClockSVG(fruitColor);
     clock.innerHTML = svg;
 
     const numbersGroup = clock.querySelector('.numbers');
@@ -70,10 +70,10 @@ function setHandRotation(clock, handClass, degrees) {
 }
 
 function updateClocks() {
-    drawClock(clocks.est, 'America/New_York');
-    drawClock(clocks.pst, 'America/Los_Angeles');
-    drawClock(clocks.mst, 'America/Denver');
-    drawClock(clocks.ist, 'Asia/Kolkata');
+    drawClock(clocks.est, 'America/New_York', '#ffcccb'); // Light Pink for EST
+    drawClock(clocks.pst, 'America/Los_Angeles', '#ffe4e1'); // Misty Rose for PST
+    drawClock(clocks.mst, 'America/Denver', '#ffb6c1'); // Light Pink for MST
+    drawClock(clocks.ist, 'Asia/Kolkata', '#f08080'); // Light Coral for IST
 
     requestAnimationFrame(updateClocks);
 }
