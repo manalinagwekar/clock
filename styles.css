@@ -7,7 +7,7 @@ body {
     margin: 0;
     font-family: 'Arial', sans-serif;
     color: #333;
-    background-image: url('orange.avif'); /* Update this */
+    background-image: url('orange.avif'); /* Update this with your actual background image */
     background-size: cover;
     background-position: center;
 }
