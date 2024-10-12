@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Zone Clock</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            transition: background-color 0.5s, color 0.5s;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #ff6347; /* A nice cherry color */
+        }
+        .container {
+            text-align: center;
+            border: 2px solid #ff6347;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s;
+        }
+        .container:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .mode-toggle {
+            margin: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff6347;
+            color: white;
+            font-size: 16px;
+        }
+        .day-mode {
+            background-color: #fff;
+            color: #333;
+        }
+        .night-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        .floral-background {
+            background-image: url('https://www.link-to-your-floral-image.com');
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="floral-background"></div>
+    <h1>Current Time in Different Time Zones</h1>
+    <div class="container">
+        <p id="est-time">EST: </p>
+        <p id="pst-time">PST: </p>
+        <p id="mt-time">MT: </p>
+        <p id="ist-time">IST: </p>
+    </div>
+    <button class="mode-toggle" onclick="toggleMode()">Toggle Day/Night Mode</button>
+
+    <script>
+        function updateTime() {
+            const options = { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('est-time').innerText = 'EST: ' + new Intl.DateTimeFormat('en-US', options).format(new Date());
+
+            options.timeZone = 'America/Los_Angeles';
+            document.getElementById('pst-time').innerText = 'PST: ' + new Intl.DateTimeFormat('en-US', options).format(new Date());
+
+            options.timeZone = 'America/Denver';
+            document.getElementById('mt-time').innerText = 'MT: ' + new Intl.DateTimeFormat('en-US', options).format(new Date());
+
+            options.timeZone = 'Asia/Kolkata';
+            document.getElementById('ist-time').innerText = 'IST: ' + new Intl.DateTimeFormat('en-US', options).format(new Date());
+        }
+
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle('night-mode');
+            body.classList.toggle('day-mode');
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call to set the time immediately
+    </script>
+</body>
+</html>
