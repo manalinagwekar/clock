@@ -1,8 +1,15 @@
 const clocks = {
     est: document.getElementById('estClock'),
     pst: document.getElementById('pstClock'),
-    mt: document.getElementById('mtClock'),
+    mst: document.getElementById('mstClock'),
     ist: document.getElementById('istClock'),
+};
+
+const timeZoneMapping = {
+    EST: 'America/New_York',
+    PST: 'America/Los_Angeles',
+    MST: 'America/Denver',
+    IST: 'Asia/Kolkata',
 };
 
 function createClockSVG() {
@@ -65,11 +72,20 @@ function setHandRotation(clock, handClass, degrees) {
 function updateClocks() {
     drawClock(clocks.est, 'America/New_York');
     drawClock(clocks.pst, 'America/Los_Angeles');
-    drawClock(clocks.mt, 'America/Denver');
+    drawClock(clocks.mst, 'America/Denver');
     drawClock(clocks.ist, 'Asia/Kolkata');
 
     requestAnimationFrame(updateClocks);
 }
 
-// Initialize clocks
-updateClocks();
+function showTimeInfo(timeZone) {
+    const now = new Date();
+    const options = { timeZone: timeZoneMapping[timeZone], year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+    const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+    
+    const timeInfoDiv = document.getElementById('timeInfo');
+    timeInfoDiv.innerHTML = `<strong>${timeZone} Time:</strong> ${timeString}`;
+    timeInfoDiv.classList.add('visible');
+}
+
+document.addEventListener('DOMContentLoaded', updateClocks);
