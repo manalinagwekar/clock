@@ -12,7 +12,7 @@ const timeZoneMapping = {
     IST: 'Asia/Kolkata',
 };
 
-// Create the clock SVG using an orange-shaped path
+// Create the clock SVG using a fruit-shaped path
 function createClockSVG() {
     return `
         <svg viewBox="0 0 200 200">
@@ -58,13 +58,16 @@ function drawClock(clock, timeZone) {
     positionNumbers(clock);
 
     const now = new Date();
-    const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true, year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+    const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
     const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
     
-    const [datePart, timePart] = timeString.split(', ');
-    const [year, month, day] = datePart.split(' '); // Split the date part to extract components
-    const [hour, minute, second] = timePart.split(':').map(Number);
+    const timeParts = timeString.split(' ');
+    const time = timeParts[0]; // "HH:MM AM/PM"
+    const amPm = timeParts[1]; // "AM/PM"
+    const dateInfo = now.toLocaleString('en-US', { timeZone, year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 
+    const [hour, minute, second] = time.split(':').map(Number);
+    
     // Set hand positions
     setHandRotation(clock, 'hour', (hour % 12) * 30 + minute * 0.5);
     setHandRotation(clock, 'minute', minute * 6 + second * 0.1);
@@ -72,7 +75,7 @@ function drawClock(clock, timeZone) {
 
     // Update date information
     const dateInfoDiv = clock.querySelector('.date-info');
-    dateInfoDiv.textContent = `${month} ${day}, ${year} (${new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone }).format(now)}) ${timePart}`;
+    dateInfoDiv.textContent = `${dateInfo} (${time})`;
 
     // Change number colors based on time
     const isDaytime = (hour >= 6 && hour < 18);
