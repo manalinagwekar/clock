@@ -32,12 +32,12 @@ function positionNumbers(clock) {
     const numbersGroup = clock.querySelector('.numbers');
     const centerX = 100;
     const centerY = 100;
-    const radius = 70; // Reduced radius for better positioning
+    const radius = 70; // Radius for number positioning
 
     for (let i = 1; i <= 12; i++) {
         const angle = (i * Math.PI) / 6; // 30 degrees in radians
-        const x = centerX + Math.cos(angle) * radius;
-        const y = centerY + Math.sin(angle) * radius;
+        const x = centerX + Math.cos(angle - Math.PI / 2) * radius; // Adjusted for top position (12 o'clock)
+        const y = centerY + Math.sin(angle - Math.PI / 2) * radius; // Adjusted for top position (12 o'clock)
         const number = document.createElementNS("http://www.w3.org/2000/svg", "text");
         number.setAttribute("x", x);
         number.setAttribute("y", y);
