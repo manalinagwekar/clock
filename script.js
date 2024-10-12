@@ -32,7 +32,7 @@ function positionNumbers(clock) {
     const numbersGroup = clock.querySelector('.numbers');
     const centerX = 100;
     const centerY = 100;
-    const radius = 70; // Radius for number positioning
+    const radius = 75; // Radius for number positioning
 
     for (let i = 1; i <= 12; i++) {
         const angle = (i * Math.PI) / 6; // 30 degrees in radians
@@ -43,8 +43,9 @@ function positionNumbers(clock) {
         number.setAttribute("y", y);
         number.setAttribute("text-anchor", "middle");
         number.setAttribute("alignment-baseline", "middle");
-        number.setAttribute("fill", "lightgray");
+        number.setAttribute("fill", "white"); // Change to white for better visibility
         number.setAttribute("font-size", "18");
+        number.setAttribute("font-family", "Arial, sans-serif");
         number.textContent = i;
         numbersGroup.appendChild(number);
     }
@@ -68,7 +69,7 @@ function drawClock(clock, timeZone, fruitColor) {
 
     // Change number colors based on time
     const isDaytime = (hour >= 6 && hour < 18);
-    const numberColor = isDaytime ? 'lightgray' : 'darkgray';
+    const numberColor = isDaytime ? 'white' : 'darkgray';
     clock.querySelectorAll('text').forEach(number => {
         number.setAttribute("fill", numberColor);
     });
