@@ -7,7 +7,7 @@ body {
     margin: 0;
     font-family: 'Arial', sans-serif;
     color: #333;
-    background-image: url('orange.avif'); /* Replace with your background image URL */
+    background-image: url('orange.avif'); /* Update this */
     background-size: cover;
     background-position: center;
 }
@@ -21,16 +21,15 @@ h1 {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    height: calc(100% - 100px); /* Adjust height based on your title */
     flex-wrap: wrap;
-    align-items: center; /* Center clocks vertically */
+    align-items: center;
 }
 
 .clock {
     position: relative;
-    width: 22vw; /* Responsive width */
-    height: 22vw; /* Responsive height */
+    width: 20vw; /* Adjusted for better responsiveness */
     max-width: 200px; /* Max size for large screens */
+    height: 20vw; /* Make height responsive */
     max-height: 200px;
     margin: 20px;
     display: flex;
@@ -47,7 +46,7 @@ h1 {
 
 .timezone {
     position: absolute;
-    bottom: 80px; /* Adjusted for better spacing */
+    bottom: 60px; /* Adjusted for better spacing */
     font-size: 20px;
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -55,7 +54,7 @@ h1 {
 
 .date-info {
     position: absolute;
-    bottom: 50px; /* Adjusted for better spacing */
+    bottom: 30px; /* Adjusted for better spacing */
     font-size: 14px;
     color: #fff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
