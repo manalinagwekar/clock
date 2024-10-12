@@ -16,6 +16,20 @@
             <div class="hand second-hand"></div>
             <div class="center-dot"></div>
             <div class="label">EST</div>
+            <div class="numbers">
+                <div class="number" style="transform: rotate(0deg);">12</div>
+                <div class="number" style="transform: rotate(30deg);">1</div>
+                <div class="number" style="transform: rotate(60deg);">2</div>
+                <div class="number" style="transform: rotate(90deg);">3</div>
+                <div class="number" style="transform: rotate(120deg);">4</div>
+                <div class="number" style="transform: rotate(150deg);">5</div>
+                <div class="number" style="transform: rotate(180deg);">6</div>
+                <div class="number" style="transform: rotate(210deg);">7</div>
+                <div class="number" style="transform: rotate(240deg);">8</div>
+                <div class="number" style="transform: rotate(270deg);">9</div>
+                <div class="number" style="transform: rotate(300deg);">10</div>
+                <div class="number" style="transform: rotate(330deg);">11</div>
+            </div>
         </div>
         <div id="pst" class="clock">
             <div class="hand hour-hand"></div>
@@ -23,6 +37,20 @@
             <div class="hand second-hand"></div>
             <div class="center-dot"></div>
             <div class="label">PST</div>
+            <div class="numbers">
+                <div class="number" style="transform: rotate(0deg);">12</div>
+                <div class="number" style="transform: rotate(30deg);">1</div>
+                <div class="number" style="transform: rotate(60deg);">2</div>
+                <div class="number" style="transform: rotate(90deg);">3</div>
+                <div class="number" style="transform: rotate(120deg);">4</div>
+                <div class="number" style="transform: rotate(150deg);">5</div>
+                <div class="number" style="transform: rotate(180deg);">6</div>
+                <div class="number" style="transform: rotate(210deg);">7</div>
+                <div class="number" style="transform: rotate(240deg);">8</div>
+                <div class="number" style="transform: rotate(270deg);">9</div>
+                <div class="number" style="transform: rotate(300deg);">10</div>
+                <div class="number" style="transform: rotate(330deg);">11</div>
+            </div>
         </div>
         <div id="mt" class="clock">
             <div class="hand hour-hand"></div>
@@ -30,6 +58,20 @@
             <div class="hand second-hand"></div>
             <div class="center-dot"></div>
             <div class="label">MT</div>
+            <div class="numbers">
+                <div class="number" style="transform: rotate(0deg);">12</div>
+                <div class="number" style="transform: rotate(30deg);">1</div>
+                <div class="number" style="transform: rotate(60deg);">2</div>
+                <div class="number" style="transform: rotate(90deg);">3</div>
+                <div class="number" style="transform: rotate(120deg);">4</div>
+                <div class="number" style="transform: rotate(150deg);">5</div>
+                <div class="number" style="transform: rotate(180deg);">6</div>
+                <div class="number" style="transform: rotate(210deg);">7</div>
+                <div class="number" style="transform: rotate(240deg);">8</div>
+                <div class="number" style="transform: rotate(270deg);">9</div>
+                <div class="number" style="transform: rotate(300deg);">10</div>
+                <div class="number" style="transform: rotate(330deg);">11</div>
+            </div>
         </div>
         <div id="ist" class="clock">
             <div class="hand hour-hand"></div>
@@ -37,9 +79,22 @@
             <div class="hand second-hand"></div>
             <div class="center-dot"></div>
             <div class="label">IST</div>
+            <div class="numbers">
+                <div class="number" style="transform: rotate(0deg);">12</div>
+                <div class="number" style="transform: rotate(30deg);">1</div>
+                <div class="number" style="transform: rotate(60deg);">2</div>
+                <div class="number" style="transform: rotate(90deg);">3</div>
+                <div class="number" style="transform: rotate(120deg);">4</div>
+                <div class="number" style="transform: rotate(150deg);">5</div>
+                <div class="number" style="transform: rotate(180deg);">6</div>
+                <div class="number" style="transform: rotate(210deg);">7</div>
+                <div class="number" style="transform: rotate(240deg);">8</div>
+                <div class="number" style="transform: rotate(270deg);">9</div>
+                <div class="number" style="transform: rotate(300deg);">10</div>
+                <div class="number" style="transform: rotate(330deg);">11</div>
+            </div>
         </div>
     </div>
-    <button class="mode-toggle" onclick="toggleMode()">Toggle Day/Night Mode</button>
 
     <script>
         function getTimeZoneTime(timeZone) {
@@ -69,10 +124,15 @@
             clock.querySelector('.hour-hand').style.transform = `rotate(${hourDeg}deg)`;
             clock.querySelector('.minute-hand').style.transform = `rotate(${minuteDeg}deg)`;
             clock.querySelector('.second-hand').style.transform = `rotate(${secondDeg}deg)`;
-        }
 
-        function toggleMode() {
-            document.body.classList.toggle('night-mode');
+            // Set number colors based on time of day
+            const hourNumber = parseInt(hour);
+            const isDaytime = (hourNumber >= 6 && hourNumber < 18);
+            const numbers = clock.querySelectorAll('.number');
+
+            numbers.forEach((num) => {
+                num.style.color = isDaytime ? 'lightgray' : 'darkgray'; // Change colors based on time
+            });
         }
 
         setInterval(updateTime, 1000);
