@@ -4,94 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Zone Clock</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            transition: background-color 0.5s, color 0.5s;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            color: #ff6347; /* A nice cherry color */
-        }
-        .container {
-            text-align: center;
-            border: 2px solid #ff6347;
-            border-radius: 10px;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.5s;
-        }
-        .container:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .mode-toggle {
-            margin: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #ff6347;
-            color: white;
-            font-size: 16px;
-        }
-        .day-mode {
-            background-color: #fff;
-            color: #333;
-        }
-        .night-mode {
-            background-color: #333;
-            color: #fff;
-        }
-        .floral-background {
-            background-image: url('https://unsplash.com/photos/a-table-topped-with-oranges-and-other-fruits-jGxDJmAcZNU');
-            background-size: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-            opacity: 0.3;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
 </head>
 <body>
-    <div class="floral-background"></div>
     <h1>Current Time in Different Time Zones</h1>
     <div class="container">
-        <p id="est-time">EST: </p>
-        <p id="pst-time">PST: </p>
-        <p id="mt-time">MT: </p>
-        <p id="ist-time">IST: </p>
+        <div id="est" class="clock">EST: 00:00</div>
+        <div id="pst" class="clock">PST: 00:00</div>
+        <div id="mt" class="clock">MT: 00:00</div>
+        <div id="ist" class="clock">IST: 00:00</div>
     </div>
     <button class="mode-toggle" onclick="toggleMode()">Toggle Day/Night Mode</button>
 
     <script>
+        function getTimeZoneTime(timeZone) {
+            const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            return new Intl.DateTimeFormat('en-US', options).format(new Date());
+        }
+
         function updateTime() {
-            const options = { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            document.getElementById('est-time').innerText = 'EST: ' + new Intl.DateTimeFormat('en-US', options).format(new Date());
+            const estTime = getTimeZoneTime('America/New_York');
+            const pstTime = getTimeZoneTime('America/Los_Angeles');
+            const mtTime = getTimeZoneTime('America/Denver');
+            const istTime = getTimeZoneTime('Asia/Kolkata');
 
-            options.timeZone = 'America/Los_Angeles';
-            document.getElementById('pst-time').innerText = 'PST: ' + new Intl.DateTimeFormat('en-US', options).format(new Date());
+            const estHour = parseInt(estTime.split(':')[0]);
+            const pstHour = parseInt(pstTime.split(':')[0]);
+            const mtHour = parseInt(mtTime.split(':')[0]);
+            const istHour = parseInt(istTime.split(':')[0]);
 
-            options.timeZone = 'America/Denver';
-            document.getElementById('mt-time').innerText = 'MT: ' + new Intl.DateTimeFormat('en-US', options).format(new Date());
+            document.getElementById('est').innerText = `EST: ${estTime}`;
+            document.getElementById('pst').innerText = `PST: ${pstTime}`;
+            document.getElementById('mt').innerText = `MT: ${mtTime}`;
+            document.getElementById('ist').innerText = `IST: ${istTime}`;
 
-            options.timeZone = 'Asia/Kolkata';
-            document.getElementById('ist-time').innerText = 'IST: ' + new Intl.DateTimeFormat('en-US', options).format(new Date());
+            updateClockTheme('est', estHour);
+            updateClockTheme('pst', pstHour);
+            updateClockTheme('mt', mtHour);
+            updateClockTheme('ist', istHour);
+        }
+
+        function updateClockTheme(id, hour) {
+            const clock = document.getElementById(id);
+            if (hour >= 6 && hour < 18) { // Daytime: 6 AM to 6 PM
+                clock.classList.add('day');
+                clock.classList.remove('night');
+            } else { // Nighttime: 6 PM to 6 AM
+                clock.classList.add('night');
+                clock.classList.remove('day');
+            }
         }
 
         function toggleMode() {
-            const body = document.body;
-            body.classList.toggle('night-mode');
-            body.classList.toggle('day-mode');
+            document.body.classList.toggle('night-mode');
         }
 
         setInterval(updateTime, 1000);
