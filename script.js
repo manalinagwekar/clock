@@ -63,7 +63,6 @@ function drawClock(clock, timeZone) {
     
     const timeParts = timeString.split(' ');
     const time = timeParts[0]; // "HH:MM AM/PM"
-    const amPm = timeParts[1]; // "AM/PM"
     const dateInfo = now.toLocaleString('en-US', { timeZone, year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 
     const [hour, minute, second] = time.split(':').map(Number);
@@ -99,13 +98,31 @@ function updateClocks() {
     requestAnimationFrame(updateClocks);
 }
 
+// Function to display detailed time information for the clicked clock
 function showTimeInfo(timeZone) {
     const now = new Date();
-    const options = { timeZone: timeZoneMapping[timeZone], year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+    const options = {
+        timeZone: timeZoneMapping[timeZone],
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        weekday: 'long',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true // 12-hour format for AM/PM
+    };
+    
+    // Format the time string according to the time zone
     const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
     
+    // Get the div to display time information
     const timeInfoDiv = document.getElementById('timeInfo');
+    
+    // Update the div with the formatted time
     timeInfoDiv.innerHTML = `<strong>${timeZone} Time:</strong> ${timeString}`;
+    
+    // Show the time information div
     timeInfoDiv.classList.add('visible');
 }
 
