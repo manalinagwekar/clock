@@ -58,7 +58,7 @@ function drawClock(clock, timeZone, fruitColor) {
     positionNumbers(clock);
 
     const now = new Date();
-    const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+    const options = { timeZone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true, year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
     const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
     
     const [datePart, timePart] = timeString.split(', ');
@@ -72,7 +72,7 @@ function drawClock(clock, timeZone, fruitColor) {
 
     // Update date information
     const dateInfoDiv = clock.querySelector('.date-info');
-    dateInfoDiv.textContent = `${month} ${day}, ${year} (${new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone }).format(now)})`;
+    dateInfoDiv.textContent = `${month} ${day}, ${year} (${new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone }).format(now)}) ${timePart}`;
 
     // Change number colors based on time
     const isDaytime = (hour >= 6 && hour < 18);
@@ -98,7 +98,7 @@ function updateClocks() {
 
 function showTimeInfo(timeZone) {
     const now = new Date();
-    const options = { timeZone: timeZoneMapping[timeZone], year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+    const options = { timeZone: timeZoneMapping[timeZone], year: 'numeric', month: 'long', day: 'numeric', weekday: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
     const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
     
     const timeInfoDiv = document.getElementById('timeInfo');
