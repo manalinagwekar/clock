@@ -1,11 +1,10 @@
 const timeZones = {
-    est: 'America/New_York',
-    pst: 'America/Los_Angeles',
-    mst: 'America/Denver',
-    ist: 'Asia/Kolkata',
+    EST: 'America/New_York',
+    PST: 'America/Los_Angeles',
+    MST: 'America/Denver',
+    IST: 'Asia/Kolkata',
 };
 
-// Create the clock SVG for each fruit clock
 function createClockSVG() {
     return `
         <svg viewBox="0 0 200 200">
@@ -20,17 +19,30 @@ function createClockSVG() {
     `;
 }
 
-// Add numbers to the clock SVG
 function positionNumbers(clock) {
     const numbersGroup = clock.querySelector('.numbers');
     const centerX = 100;
     const centerY = 100;
     const radius = 80;
 
-    for (let i = 1; i <= 12; i++) {
-        const angle = (i * Math.PI) / 6; // 30 degrees in radians
-        const x = centerX + Math.cos(angle - Math.PI / 2) * radius;
-        const y = centerY + Math.sin(angle - Math.PI / 2) * radius;
+    const numberPositions = [
+        { num: 12, angle: 0 },
+        { num: 1, angle: 30 },
+        { num: 2, angle: 60 },
+        { num: 3, angle: 90 },
+        { num: 4, angle: 120 },
+        { num: 5, angle: 150 },
+        { num: 6, angle: 180 },
+        { num: 7, angle: 210 },
+        { num: 8, angle: 240 },
+        { num: 9, angle: 270 },
+        { num: 10, angle: 300 },
+        { num: 11, angle: 330 },
+    ];
+
+    numberPositions.forEach(({ num, angle }) => {
+        const x = centerX + Math.cos((angle * Math.PI) / 180) * radius;
+        const y = centerY + Math.sin((angle * Math.PI) / 180) * radius;
         const number = document.createElementNS("http://www.w3.org/2000/svg", "text");
         number.setAttribute("x", x);
         number.setAttribute("y", y);
@@ -38,12 +50,11 @@ function positionNumbers(clock) {
         number.setAttribute("alignment-baseline", "middle");
         number.setAttribute("fill", "white");
         number.setAttribute("font-size", "18");
-        number.textContent = i;
+        number.textContent = num;
         numbersGroup.appendChild(number);
-    }
+    });
 }
 
-// Draw the clock with the correct time
 function drawClock(clock, timeZone) {
     const svg = createClockSVG();
     clock.innerHTML = svg;
@@ -60,7 +71,7 @@ function drawClock(clock, timeZone) {
 
     const dateInfoDiv = clock.querySelector('.date-info');
     const dateInfo = now.toLocaleDateString('en-US', { timeZone, year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
-    dateInfoDiv.textContent = `${dateInfo}`;
+    dateInfoDiv.textContent = dateInfo;
 }
 
 function setHandRotation(clock, handClass, degrees) {
@@ -74,10 +85,10 @@ function updateClocks() {
     const mstClock = document.getElementById('mstClock');
     const istClock = document.getElementById('istClock');
 
-    drawClock(estClock, timeZones.est);
-    drawClock(pstClock, timeZones.pst);
-    drawClock(mstClock, timeZones.mst);
-    drawClock(istClock, timeZones.ist);
+    drawClock(estClock, timeZones.EST);
+    drawClock(pstClock, timeZones.PST);
+    drawClock(mstClock, timeZones.MST);
+    drawClock(istClock, timeZones.IST);
 
     requestAnimationFrame(updateClocks);
 }
