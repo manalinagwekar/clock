@@ -42,7 +42,7 @@ function positionNumbers(clock) {
 
     numberPositions.forEach(({ num, angle }) => {
         const x = centerX + Math.cos((angle * Math.PI) / 180) * radius;
-        const y = centerY + Math.sin((angle * Math.PI) / 180) * radius;
+        const y = centerY + Math.sin((angle * Math.PI) / 180) * radius + 6; // Offset for centering
         const number = document.createElementNS("http://www.w3.org/2000/svg", "text");
         number.setAttribute("x", x);
         number.setAttribute("y", y);
