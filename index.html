@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fruit-Themed Timezone Clocks</title>
+    <title>Fruit Clocks</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Timezone Clocks</h1>
-    <div class="clock-container">
-        <div class="clock" id="estClock">
-            <div class="timezone-label">EST</div>
+    <h1>Fruit Clocks for Multiple Time Zones</h1>
+    <div class="container">
+        <div class="clock" id="estClock" onclick="showTimeInfo('EST')">
+            <div class="timezone">EST</div>
             <div class="date-info"></div>
         </div>
-        <div class="clock" id="pstClock">
-            <div class="timezone-label">PST</div>
+        <div class="clock" id="pstClock" onclick="showTimeInfo('PST')">
+            <div class="timezone">PST</div>
             <div class="date-info"></div>
         </div>
-        <div class="clock" id="mstClock">
-            <div class="timezone-label">MST</div>
+        <div class="clock" id="mstClock" onclick="showTimeInfo('MST')">
+            <div class="timezone">MST</div>
             <div class="date-info"></div>
         </div>
-        <div class="clock" id="istClock">
-            <div class="timezone-label">IST</div>
+        <div class="clock" id="istClock" onclick="showTimeInfo('IST')">
+            <div class="timezone">IST</div>
             <div class="date-info"></div>
         </div>
     </div>
-
+    <div id="timeInfo" class="time-info"></div>
     <script src="script.js"></script>
 </body>
 </html>
