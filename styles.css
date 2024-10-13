@@ -4,17 +4,17 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url('orange.avif'); /* Make sure to replace with the correct URL */
+    background-image: url('orange.avif'); /* Use your own background image URL */
     background-size: cover;
     margin: 0;
     font-family: 'Arial', sans-serif;
-    color: #fff;
+    color: white;
 }
 
 h1 {
-    color: #ff6347;
+    color: #FFA500;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .clock-container {
@@ -30,11 +30,11 @@ h1 {
     height: 200px;
     margin: 20px;
     border-radius: 50%;
-    background-color: orange; /* Fruit-themed */
+    background-color: orange;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .clock svg {
@@ -42,30 +42,18 @@ h1 {
     height: 100%;
 }
 
-.timezone-label {
+.timezone-label, .date-info {
     position: absolute;
-    bottom: 10px;
-    font-size: 20px;
+    font-size: 16px;
+    text-align: center;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.timezone-label {
+    bottom: 10px;
 }
 
 .date-info {
-    position: absolute;
     top: 170px;
-    font-size: 14px;
-    color: white;
-}
-
-.time-info {
-    margin-top: 20px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.8);
-    color: black;
-    border-radius: 8px;
-    display: none;
-}
-
-.time-info.visible {
-    display: block;
+    font-size: 12px;
 }
