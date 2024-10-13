@@ -2,7 +2,7 @@ const timeZones = {
     EST: 'America/New_York',
     PST: 'America/Los_Angeles',
     MST: 'America/Denver',
-    IST: 'Asia/Kolkata',
+    IST: 'Asia/Kolkata'
 };
 
 function createClockSVG() {
@@ -23,7 +23,7 @@ function positionNumbers(clock) {
     const numbersGroup = clock.querySelector('.numbers');
     const centerX = 100;
     const centerY = 100;
-    const radius = 75; // Adjust radius for better number positioning
+    const radius = 75;
 
     const numberPositions = [
         { num: 12, angle: 0 },
@@ -37,12 +37,12 @@ function positionNumbers(clock) {
         { num: 8, angle: 240 },
         { num: 9, angle: 270 },
         { num: 10, angle: 300 },
-        { num: 11, angle: 330 },
+        { num: 11, angle: 330 }
     ];
 
     numberPositions.forEach(({ num, angle }) => {
         const x = centerX + Math.cos((angle * Math.PI) / 180) * radius;
-        const y = centerY + Math.sin((angle * Math.PI) / 180) * radius + 6; // Offset for centering
+        const y = centerY + Math.sin((angle * Math.PI) / 180) * radius + 6;
         const number = document.createElementNS("http://www.w3.org/2000/svg", "text");
         number.setAttribute("x", x);
         number.setAttribute("y", y);
