@@ -4,7 +4,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url('orange.avif'); /* Update with your background image URL */
+    background-image: url('orange.avif'); /* Set your background image */
     background-size: cover;
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -30,7 +30,7 @@ h1 {
     height: 200px;
     margin: 20px;
     border-radius: 50%;
-    background-color: orange; /* Fruit-themed */
+    background-color: orange;
     display: flex;
     justify-content: center;
     align-items: center;
